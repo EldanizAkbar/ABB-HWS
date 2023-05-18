@@ -2,6 +2,10 @@
   "name": "project-x",
   "version": "1.0.0",
   "description": "Eldaniz Akbarzade - Full-Stack-1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EldanizAkbar/ABB-HWS/tree/main/HW-1/project-x"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node app.js"
