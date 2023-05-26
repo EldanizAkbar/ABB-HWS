@@ -5,7 +5,7 @@ const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const jsMinify = require('gulp-js-minify');
-// const imagemin = require('gulp-imagemin');
+const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
 
 
@@ -30,15 +30,15 @@ gulp.task('scripts', function () {
     .pipe(browserSync.stream());
 });
 
-// gulp.task('convertImg', function () {
-//     return gulp
-//     .src('src/img/*')
-//     .pipe(imagemin())
-//     .pipe(gulp.dest('dist/img'))
-//     .pipe(browserSync.stream());
-// });
+gulp.task('convertImg', function () {
+    return gulp
+    .src('src/img/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/img'))
+    .pipe(browserSync.stream());
+});
 
-gulp.task('serve', () => {
+gulp.task('watch', () => {
     browserSync.init({
       server: {
         baseDir: './',
@@ -48,7 +48,7 @@ gulp.task('serve', () => {
   
     gulp.watch("src/scss/base/main.scss", gulp.series("compileSass"));
     gulp.watch('src/js/*.js', gulp.series('scripts'));
-    // gulp.watch('src/img/*', gulp.series('convertImg'));
+    gulp.watch('src/img/*', gulp.series('convertImg'));
     gulp.watch('*.html').on('change', browserSync.reload);
   });
 
