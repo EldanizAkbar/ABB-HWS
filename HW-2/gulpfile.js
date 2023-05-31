@@ -11,7 +11,7 @@ const browserSync = require('browser-sync').create();
 
 gulp.task('compileSass', function () {
     return gulp
-    .src('src/scss/base/main.scss')
+    .src('src/scss/**/*')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(concat('styles.min.css'))
@@ -38,7 +38,15 @@ gulp.task('convertImg', function () {
     .pipe(browserSync.stream());
 });
 
-gulp.task('watch', () => {
+
+gulp.task("build", () => {
+  gulp.watch("src/scss/**/*", gulp.series("compileSass"));
+  gulp.watch("src/js/*.js", gulp.series("scripts"));
+  gulp.watch("src/img/*", gulp.series("convertImg"));
+});
+
+
+gulp.task('dev', () => {
     browserSync.init({
       server: {
         baseDir: './',
@@ -46,9 +54,9 @@ gulp.task('watch', () => {
       }
     });
   
-    gulp.watch("src/scss/base/main.scss", gulp.series("compileSass"));
-    gulp.watch('src/js/*.js', gulp.series('scripts'));
-    gulp.watch('src/img/*', gulp.series('convertImg'));
+    gulp.watch("src/scss/**/*", gulp.series("compileSass")).on('change', browserSync.reload);;
+    gulp.watch('src/js/*.js', gulp.series('scripts')).on('change', browserSync.reload);;
+    gulp.watch('src/img/*', gulp.series('convertImg')).on('change', browserSync.reload);;
     gulp.watch('*.html').on('change', browserSync.reload);
   });
 
