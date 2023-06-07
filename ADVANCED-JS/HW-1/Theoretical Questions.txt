@@ -1,0 +1,74 @@
+1)Every object in JavaScript has a special link called __proto__ that points to another object.
+When we want to access a property or method on an object, JavaScript checks if that property or method exists in the object itself. 
+If it doesn't, JavaScript looks at the object's __proto__ link to see if it's defined there. 
+If it's still not found, JavaScript continues to follow the __proto__ family until it either finds the property or method or reaches the end of the chain.
+It's like passing down characteristics and behaviors from one generation to the next in a family tree.
+
+Code Example:
+
+// Parent object
+const parent = {
+  name: "Eldaniz",
+  age: 23,
+  Hello() {
+    console.log(`Hello, my name is ${this.name}`);
+  },
+};
+
+// Child object
+const child = Object.create(parent);
+child.name = "Sultan";
+child.sayHello = function () {
+  console.log(`Hi, I'm ${this.name}`);
+};
+
+child.Hello(); // Output: Hello, my name is Sultan
+child.sayHi(); // Output: Hi, I'm Sultan
+
+
+
+
+
+
+
+2)When a class extends another class in JavaScript, the child class must set up the parent class's properties before setting its own properties. 
+To achieve this, we use the super() function inside the constructor of the child class. 
+For example, we have the same argument or method in both the child and parent class. 
+And we want to use parent class's argument or method in child class, then we should use super() in child class to use this argument or method in child class.
+
+Code Example:
+
+// Parent class
+class Parent {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHello() {
+    console.log(`My name is ${this.name}`);
+  }
+}
+
+// Child class inheriting from Parent
+class Child extends Parent {
+  constructor(name, surname) {
+    super(name); 
+    this.surname = surname;
+  }
+
+  sayHello() {
+    console.log(`My surname is ${this.surname}`);
+  }
+
+    Hi(){
+      //return this.sayHello();
+      return super.sayHello();
+    }
+
+}
+
+
+const child = new Child("Eldaniz", "Akbarzade");
+
+child.Hi(); // Output: My name is Eldaniz
+
