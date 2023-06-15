@@ -1,0 +1,45 @@
+There are a few examples of situations where it is appropriate to use the try...catch construct:
+
+1)Form validation: When accepting user input or data from external sources, there is a risk of receiving invalid or unexpected data that can cause the program to crash or behave unexpectedly.
+  By wrapping the input processing code in a try block, we can catch exceptions related to invalid input, such as format errors or out-of-range values, and provide meaningful feedback or prompt for correct input.
+
+Code Example:
+
+function enterData(data) {
+  try {
+    const number = parseInt(data);
+    if (isNaN(number)) {
+      throw new Error('Invalid input: not a number');
+    }
+    console.log('Data number:', number);
+  } catch (error) {
+    console.error('Error false input:', error);
+  }
+}
+
+enterData('123');       
+enterData('abc');       
+
+
+
+
+2)Mathematical calculations: In complex mathematical calculations, errors can occur due to division by zero, overflow, or invalid mathematical operations. 
+  By placing such calculations in a try block and catching the relevant exceptions, we can handle these errors by providing default values, recalculating with alternative methods, or informing the user about the error.
+
+
+Code Example:
+
+function calculate(a, b) {
+  try {
+    const result = a / b;
+    if (!isFinite(result)) {
+      throw new Error('Invalid calculation: result is not finite');
+    }
+    console.log('Result:', result);
+  } catch (error) {
+    console.error('Error false calculation:', error);
+  }
+}
+
+calculate(10, 2);   
+calculate(10, 0);     
