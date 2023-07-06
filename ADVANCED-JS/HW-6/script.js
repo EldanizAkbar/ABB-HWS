@@ -11,9 +11,7 @@ async function findIp() {
 
     /*The api that finds the location with the ip you upload to gitlab is paid, 
     so I used another api that is free and gave the country name, code and ISP in response.*/
-    const locationResponse = await fetch(
-      `https://api.iplocation.net/?ip=${ip}`
-    );
+    const locationResponse = await fetch(`http://ip-api.com/json/${ip}`);
     const address = await locationResponse.json();
 
     findLocation(address);
@@ -29,8 +27,9 @@ async function findIp() {
 function findLocation(address) {
   const div = document.getElementById("result");
   div.innerHTML = `
-    <p><strong>Country:</strong> ${address.country_name}</p>
-    <p><strong>Country Code:</strong> ${address.country_code2}</p>
-    <p><strong>ISP:</strong> ${address.isp}</p>
+  <p><strong>Country:</strong> ${address.country}</p>
+  <p><strong>Region:</strong> ${address.regionName}</p>
+  <p><strong>City:</strong> ${address.city}</p>
+  <p><strong>Timezone:</strong> ${address.timezone}</p>
   `;
 }
